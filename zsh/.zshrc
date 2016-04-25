@@ -100,3 +100,7 @@ set-window-title() {
 PR_TITLEBAR=''
 set-window-title
 add-zsh-hook precmd set-window-title
+
+echo '\n'
+screenfetch
+echo '\n'

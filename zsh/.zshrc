@@ -93,7 +93,7 @@ source $ZSH/oh-my-zsh.sh
 DISABLE_AUTO_TITLE="true"
 
 set-window-title() {
- window_title="\e]0;%n@%m\a"
+ window_title="\e]0;%n@%M\a"
  print -Pn "$window_title"
   }
 

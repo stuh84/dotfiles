@@ -49,7 +49,7 @@ ZSH_THEME="mh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git history-substring-search zsh-syntax-highlighting)
+plugins=(git tmux docker history-substring-search zsh-syntax-highlighting)
 
 
 # bind UP and DOWN arrow keys

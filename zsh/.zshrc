@@ -102,5 +102,5 @@ set-window-title
 add-zsh-hook precmd set-window-title
 
 echo '\n'
-screenfetch
+neofetch
 echo '\n'

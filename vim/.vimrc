@@ -6,7 +6,7 @@
 " We set it explicitely to make our position clear!
 set nocompatible
 
-filetype plugin indent on  " Load plugins according to detected filetype.
+filetype plugin on  " Load plugins according to detected filetype.
 syntax on                  " Enable syntax highlighting.
 
 set expandtab              " Use spaces instead of tabs.
@@ -60,3 +60,5 @@ set updatecount =100
 set undofile
 set undodir     =$HOME/.vim/files/undo/
 set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+no set autoindent
+set cm=blowfish2

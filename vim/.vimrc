@@ -1,64 +1,75 @@
-"
-" A (not so) minimal vimrc.
-"
+" Pathogen Invocation
+execute pathogen#infect()
 
-" You want Vim, not vi. When Vim finds a vimrc, 'nocomptaible' is set anyway.
-" We set it explicitely to make our position clear!
-set nocompatible
+" Remap some keys
+set pastetoggle=<F3>
+:nmap <F4> :set invnumber<CR>
+:nmap <F7> :set norelativenumber!<CR>
+:nnoremap <F5> :buffers<CR>:buffer<Space>
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
 
-filetype plugin on  " Load plugins according to detected filetype.
-syntax on                  " Enable syntax highlighting.
+" Standard
+syntax on
+filetype plugin indent on
 
-set expandtab              " Use spaces instead of tabs.
-set softtabstop =4         " Tab key indents by 4 spaces.
-set shiftwidth  =4         " >> indents by 4 spaces.
-set shiftround             " >> indents to next multiple of 'shiftwidth'.
+" Backup and swap directories
+set backupdir=~/.vim/tmp/                   " for the backup files
+set directory=~/.vim/tmp/                   " for the swap files
 
-set backspace   =indent,eol,start  " Make backspace work as you would expect.
-set hidden                 " Switch between buffers without having to save first.
-set laststatus  =2         " Always show statusline.
-set display     =lastline  " Show as much as possible of the last line.
+" Powerlineness
+set rtp+=/usr/lib/python2.7/dist-packages/powerline/
+set laststatus=2
+set t_Co=256
 
-set showmode               " Show current mode in command-line.
-set showcmd                " Show already typed keys when more are expected.
+" Incremental Search
+set incsearch
 
-set incsearch              " Highlight while searching with / or ?.
-set hlsearch               " Keep matches highlighted.
+" Ruler
+set ruler
 
-set ttyfast                " Faster redrawing.
-set lazyredraw             " Only redraw when necessary.
+" Spaces instead of tabs
+set expandtab
 
-set splitbelow             " Open new windows below the current window.
-set splitright             " Open new windows right of the current window.
+""""""""""""""""""""
+""""""""""""""""""""
+" Pathogen Plugins "
+""""""""""""""""""""
+""""""""""""""""""""
 
-"set number
-set wrapscan               " Searches wrap around end-of-file.
-set report      =0         " Always report changed lines.
-set synmaxcol   =200       " Only highlight the first 200 columns.
+"" NERDTree
 
-set list                   " Show non-printable characters.
-if has('multi_byte') && &encoding ==# 'utf-8'
-  let &listchars = 'tab:? ,extends:?,precedes:?,nbsp:±'
-else
-  let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
-endif
+" START NERDTree if no files are specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" The fish shell is not very compatible to other shells and unexpectedly
-" breaks things that use 'shell'.
-if &shell =~# 'fish$'
-  set shell=/bin/bash
-endif
+" Close NERDTree if it's the only window left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" Put all temporary files under the same directory.
-" https://github.com/mhinz/vim-galore#handling-backup-swap-undo-and-viminfo-files
-set backup
-set backupdir   =$HOME/.vim/files/backup/
-set backupext   =-vimbackup
-set backupskip  =
-set directory   =$HOME/.vim/files/swap//
-set updatecount =100
-set undofile
-set undodir     =$HOME/.vim/files/undo/
-set viminfo     ='100,n$HOME/.vim/files/info/viminfo
-no set autoindent
-set cm=blowfish2
+" https://github.com/nathanaelkane/vim-indent-guides/issues/20
+let g:indent_guides_exclude_filetypes = ['nerdtree']
+
+" Start NerdTree
+map <C-n> :NERDTreeToggle<CR>
+
+" NerdTree UI Elements
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+" END NERDTree
+
+"" Airline
+" START Airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
+let g:airline_theme='murmur'
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#enabled=1
+" " END Airline
+
+" space-vim-dark Colour Scheme
+"   Range:   233 (darkest) ~ 238 (lightest)
+"   "   Default: 235
+let g:space_vim_dark_background = 233
+color space-vim-dark
